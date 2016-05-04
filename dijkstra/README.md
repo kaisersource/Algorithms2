@@ -1,4 +1,4 @@
-DJIKSTRA (SINGLE SOURCE SHORTEST PATH - SSSP)
+DJIKSTRA (SINGLE SOURCE SHORTEST PATH)
 =======
 
 ###1)Assegnare ad ogni nodo un valore "tentativo",nel grafo di partenza il nodo sorgente ha valore 0, tutti gli altri infinito.
