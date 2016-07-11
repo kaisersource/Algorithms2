@@ -1,6 +1,5 @@
 /*
-	Program for finding minimum Spanning Tree using Prim's Algorithm
-	Author: PracsPedia		www.pracspedia.com
+	www.pracspedia.com
 */
 #include<stdio.h>
 #include<conio.h>
