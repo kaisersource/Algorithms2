@@ -18,6 +18,7 @@ void Output(int **A,int dim){
 			printf("%d",A[i][j]);
 	}
 	printf("\n");
+	printf("\n");
 }
 
 void inserimento(int **A,int dim){
@@ -43,6 +44,24 @@ void inserimento(int **A,int dim){
 				printf("vuoi inserire un altro arco?\n");
 				scanf(" %c",&answer);
 			}
+
+}
+void check_graph_conn(int **A, int dim){ //conto gli zero per ogni riga. Se una riga ha tutti elementi nulli, significa che il grafo non è connesso.
+		int c_notzero,contatore_righe_nulle=0;
+		for(int i=0;i<dim;i++){
+			c_notzero=0;
+			for(int j=i+1;j<dim;j++){
+				if(A[i][j]==1)
+				 c_notzero++;
+			}
+			if(c_notzero==0)
+				contatore_righe_nulle++; //significa che ci sono almeno due componenti connesse
+		}
+		if(contatore_righe_nulle==0) //se c'è almeno una riga nulla nella triangolare superiore allora la componente connessa non è più unica
+			printf("il grafo è connesso, dotato quindi di un'unica componente connessa");
+		else
+			printf("il grafo non è connesso", contatore_righe_nulle);
+			printf("\n");
 }
 int mostarkedval(int **A,int dim){//elemento con piu archi. A e' una matrice di adiacenza di soli booleani
 	int *Carry = calloc(dim,sizeof(int));//vettore d'appoggio per contare le ocorrenze
@@ -91,8 +110,8 @@ int checkGraphRegularity(int **A,int dim){
 		for(int i=0;i<dim-1;i++){
 			if(C[i]!=C[i+1]) //Se sono uguali non entra nella condizione e ritorna 1 (Regolare). Altrimenti 0 (non regolare).
 				return 0;
-																				
-													
+
+
 		}
 		return 1;
 }
@@ -104,9 +123,12 @@ int main(){
 	scanf("%d",&dim);
 	A = creazione(dim);
 	inserimento(A,dim);
+
 	Output(A,dim);
+	check_graph_conn(A,dim);
 	printf("Elemento con piu archi => %d\n",mostarkedval(A,dim));
 	detectIsolatedNodes(A,dim);
 	printf("\n");
 	printf("Grafo regolare = 1, Irregolare = 0  => %d\n",checkGraphRegularity(A,dim));
+
 }
