@@ -48,7 +48,7 @@ void inserimento(int **A,int dim){
 }
 void check_graph_conn(int **A, int dim){ //conto gli zero per ogni riga. Se una riga ha tutti elementi nulli, significa che il grafo non è connesso.
 		int c_notzero,contatore_righe_nulle=0;
-		for(int i=0;i<dim;i++){
+		for(int i=0;i<dim-1;i++){
 			c_notzero=0;
 			for(int j=i+1;j<dim;j++){
 				if(A[i][j]==1)
@@ -60,7 +60,7 @@ void check_graph_conn(int **A, int dim){ //conto gli zero per ogni riga. Se una 
 		if(contatore_righe_nulle==0) //se c'è almeno una riga nulla nella triangolare superiore allora la componente connessa non è più unica
 			printf("il grafo è connesso, dotato quindi di un'unica componente connessa");
 		else
-			printf("il grafo non è connesso", contatore_righe_nulle);
+			printf("il grafo non è connesso, il numero delle componenti connesse è %d", dim-contatore_righe_nulle);
 			printf("\n");
 }
 int mostarkedval(int **A,int dim){//elemento con piu archi. A e' una matrice di adiacenza di soli booleani
