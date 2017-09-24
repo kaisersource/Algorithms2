@@ -46,22 +46,55 @@ void inserimento(int **A,int dim){
 			}
 
 }
+/*
+//dfs per trovare il numero delle componenti connesse
+void dfs(int **A,int dim,int i){ //di default il nodo iniziale è 0
+	printf("applicazione dfs \n");
+	int *visited=(int*)malloc(dim*sizeof(int));
+	int j;
+	printf("%d ",i);
+	visited[i]=1;
+	for(j=0;j<dim;j++){
+ 	   if(visited[j]==0 && A[i][j]==1)
+        dfs(A,dim,j);
+	}
+}
+*/
 void check_graph_conn(int **A, int dim){ //conto gli zero per ogni riga. Se una riga ha tutti elementi nulli, significa che il grafo non è connesso.
 		int c_notzero,contatore_righe_nulle=0;
+		//int **B = calloc(dim,1+sizeof(int*));
+		//matrice che memorizza le componenti connesse
+	/*	for(int i = 0;i<dim;i++) {
+	    		B[i] = calloc(dim, sizeof(int));
+	    	}*/
 		for(int i=0;i<dim-1;i++){
 			c_notzero=0;
 			for(int j=i+1;j<dim;j++){
-				if(A[i][j]==1)
+				if(A[i][j]==1){
 				 c_notzero++;
+				/*B[i][j]=i;
+				B[j][i]=j;
+
+				printf("%d",B[i][j]);
+				printf("%d",B[j][i]);*/
+					
+				}
+
 			}
 			if(c_notzero==0)
 				contatore_righe_nulle++; //significa che ci sono almeno due componenti connesse
+				//printf(",");//riga vuota corrisponde ad una successiva componente connessa se ci sarà
+				
 		}
 		if(contatore_righe_nulle==0) //se c'è almeno una riga nulla nella triangolare superiore allora la componente connessa non è più unica
 			printf("il grafo è connesso, dotato quindi di un'unica componente connessa");
 		else
 			printf("il grafo non è connesso, il numero delle componenti connesse è %d", dim-contatore_righe_nulle);
+			
 			printf("\n");
+		
+
+		
 }
 int mostarkedval(int **A,int dim){//elemento con piu archi. A e' una matrice di adiacenza di soli booleani
 	int *Carry = calloc(dim,sizeof(int));//vettore d'appoggio per contare le ocorrenze
@@ -125,6 +158,7 @@ int main(){
 	inserimento(A,dim);
 
 	Output(A,dim);
+	//dfs(A,dim,0);
 	check_graph_conn(A,dim);
 	printf("Elemento con piu archi => %d\n",mostarkedval(A,dim));
 	detectIsolatedNodes(A,dim);
